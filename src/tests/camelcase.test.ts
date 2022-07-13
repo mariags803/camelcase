@@ -1,34 +1,22 @@
 import {camelcase} from "../camelcase";
 
-describe("Camel Case should",()=>{
-    it("Text = '' retuns ''", ()=>{
-        const result = camelcase("");
-        const expected = "";
-        expect(result).toBe(expected);
+describe("Camel case converter",()=>{
+    it("Allows empty text", ()=>{
+        expect(camelcase("")).toBe("");
     });
-    it("Text = 'Foo' retuns 'Foo'", ()=>{
-        const result = camelcase("Foo");
-        const expected = "Foo";
-        expect(result).toBe(expected);
+    it("Allows capitalized word", ()=>{
+        expect(camelcase("Foo")).toBe("Foo");
     });
-    it("Text = 'Foo Bar' retuns 'FooBar'", ()=>{
-        const result = camelcase("Foo Bar");
-        const expected = "FooBar";
-        expect(result).toBe(expected);
+    it("Joins capitalized words separated by spaces", ()=>{
+        expect(camelcase("Foo Bar")).toBe("FooBar");
     });
-    it("Text = 'Foo_Bar-Foo' retuns 'FooBarFoo'", ()=>{
-        const result = camelcase("Foo_Bar-Foo");
-        const expected = "FooBarFoo";
-        expect(result).toBe(expected);
+    it("Joins capitalized words separated by hyphens and underscores'", ()=>{
+        expect(camelcase("Foo_Bar-Foo")).toBe("FooBarFoo");
     });
-    it("Text = 'foo' retuns 'Foo'", ()=>{
-        const result = camelcase("foo");
-        const expected = "Foo";
-        expect(result).toBe(expected);
+    it("Converts a not capitalized word in capitalized word", ()=>{
+        expect(camelcase("foo")).toBe("Foo");
     });
-    it("Text = 'foo_bar foo-bar' retuns 'FooBarFooBar'", ()=>{
-        const result = camelcase("foo_bar foo-bar");
-        const expected = "FooBarFooBar";
-        expect(result).toBe(expected);
+    it("Converts all not capitalized words in capitalized words", ()=>{
+        expect(camelcase("foo_bar foo-bar")).toBe("FooBarFooBar");
     });
 });
